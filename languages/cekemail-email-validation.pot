@@ -1,0 +1,375 @@
+# Copyright (C) 2026 CekEmail
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: CekEmail Email Validation 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-10T15:52:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: cekemail-email-validation\n"
+
+#. Plugin Name of the plugin
+#: cekemail-email-validation.php
+#: includes/Settings.php:413
+#: includes/Settings.php:461
+msgid "CekEmail Email Validation"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: cekemail-email-validation.php
+msgid "https://cekemail.com/"
+msgstr ""
+
+#. Description of the plugin
+#: cekemail-email-validation.php
+msgid "Validates email addresses submitted through WordPress forms with the CekEmail API, blocking invalid, undeliverable and disposable addresses before they reach your database."
+msgstr ""
+
+#. Author of the plugin
+#: cekemail-email-validation.php
+#: includes/Settings.php:414
+msgid "CekEmail"
+msgstr ""
+
+#: includes/Admin_Notices.php:97
+msgid "CekEmail:"
+msgstr ""
+
+#: includes/Admin_Notices.php:100
+msgid "Open CekEmail settings"
+msgstr ""
+
+#: includes/Admin_Notices.php:114
+msgid "Your account has run out of credits, so email addresses are no longer being verified."
+msgstr ""
+
+#: includes/Admin_Notices.php:116
+msgid "Your API key is not allowed to verify email addresses from this site. Check its scopes and IP allowlist."
+msgstr ""
+
+#: includes/Admin_Notices.php:119
+msgid "Your API key was rejected. Email addresses are no longer being verified."
+msgstr ""
+
+#: includes/Api_Client.php:90
+msgid "Add your API key and save the settings before testing the connection."
+msgstr ""
+
+#: includes/Api_Client.php:101
+msgid "Connection successful. Your API key is valid."
+msgstr ""
+
+#: includes/Api_Client.php:285
+msgid "The API key was rejected. Check that you copied the whole key and that it has not been revoked."
+msgstr ""
+
+#: includes/Api_Client.php:287
+msgid "Your CekEmail account has run out of credits."
+msgstr ""
+
+#: includes/Api_Client.php:289
+msgid "This API key is not allowed to verify email addresses from this site. Check its scopes and IP allowlist."
+msgstr ""
+
+#: includes/Api_Client.php:291
+msgid "Too many requests were sent to the API. Please try again in a minute."
+msgstr ""
+
+#: includes/Api_Client.php:293
+msgid "Could not reach the CekEmail API. Check the API URL and your server connectivity."
+msgstr ""
+
+#: includes/Api_Client.php:295
+msgid "The API returned an unexpected response."
+msgstr ""
+
+#: includes/Integrations/Core_Comments.php:99
+msgid "Comment blocked"
+msgstr ""
+
+#: includes/Settings.php:123
+msgid "WordPress user registration"
+msgstr ""
+
+#: includes/Settings.php:124
+msgid "WordPress comments"
+msgstr ""
+
+#: includes/Settings.php:125
+msgid "WooCommerce checkout and registration"
+msgstr ""
+
+#: includes/Settings.php:126
+msgid "Contact Form 7"
+msgstr ""
+
+#: includes/Settings.php:251
+msgid "General"
+msgstr ""
+
+#: includes/Settings.php:258
+msgid "API key"
+msgstr ""
+
+#: includes/Settings.php:266
+msgid "API URL"
+msgstr ""
+
+#: includes/Settings.php:274
+msgid "Request timeout"
+msgstr ""
+
+#: includes/Settings.php:282
+msgid "Connection"
+msgstr ""
+
+#: includes/Settings.php:290
+msgid "Policy"
+msgstr ""
+
+#: includes/Settings.php:297
+msgid "Disposable addresses"
+msgstr ""
+
+#: includes/Settings.php:303
+msgid "Block addresses from disposable mail providers"
+msgstr ""
+
+#: includes/Settings.php:309
+msgid "Catch-all domains"
+msgstr ""
+
+#: includes/Settings.php:315
+msgid "Catch-all servers accept every address, so the mailbox itself cannot be confirmed."
+msgstr ""
+
+#: includes/Settings.php:321
+msgid "Unverifiable addresses"
+msgstr ""
+
+#: includes/Settings.php:327
+msgid "Used when the mail server greylists us or gives no usable answer."
+msgstr ""
+
+#: includes/Settings.php:333
+msgid "API errors"
+msgstr ""
+
+#: includes/Settings.php:339
+msgid "Used when the API cannot be reached, the key is rejected or credits run out."
+msgstr ""
+
+#: includes/Settings.php:345
+msgid "Typo suggestions"
+msgstr ""
+
+#: includes/Settings.php:351
+msgid "Include the suggested address in the error message"
+msgstr ""
+
+#: includes/Settings.php:357
+msgid "Cache lifetime"
+msgstr ""
+
+#: includes/Settings.php:365
+msgid "Integrations"
+msgstr ""
+
+#: includes/Settings.php:372
+msgid "Check addresses on"
+msgstr ""
+
+#: includes/Settings.php:380
+msgid "Front-end widget"
+msgstr ""
+
+#: includes/Settings.php:387
+msgid "Widget"
+msgstr ""
+
+#: includes/Settings.php:393
+msgid "Check every email field in the browser while visitors type"
+msgstr ""
+
+#: includes/Settings.php:399
+msgid "Widget key"
+msgstr ""
+
+#: includes/Settings.php:441
+msgid "Testing the connection…"
+msgstr ""
+
+#: includes/Settings.php:442
+msgid "The connection test could not be completed."
+msgstr ""
+
+#: includes/Settings.php:538
+#: includes/Settings.php:565
+msgid "You are not allowed to do that."
+msgstr ""
+
+#: includes/Settings.php:544
+msgid "The API client is not available."
+msgstr ""
+
+#: includes/Settings.php:584
+msgid "Create an API key in your CekEmail dashboard and paste it here."
+msgstr ""
+
+#: includes/Settings.php:593
+msgid "Decide what happens when an address cannot be confirmed. Invalid addresses are always blocked."
+msgstr ""
+
+#: includes/Settings.php:602
+msgid "Integrations only run while an API key is saved."
+msgstr ""
+
+#: includes/Settings.php:611
+msgid "The widget gives visitors feedback before they submit a form. It never exposes your API key."
+msgstr ""
+
+#: includes/Settings.php:612
+msgid "The script is bundled with the plugin, is only loaded on the front end, and attaches itself to every email field on the page, whichever plugin or theme rendered it."
+msgstr ""
+
+#: includes/Settings.php:629
+msgid "A key is saved. Leave blank to keep the current key."
+msgstr ""
+
+#: includes/Settings.php:631
+msgid "No key saved yet. Leave blank to keep the current key."
+msgstr ""
+
+#: includes/Settings.php:649
+msgid "Only change this if you use a self-hosted CekEmail instance."
+msgstr ""
+
+#: includes/Settings.php:664
+#: includes/Settings.php:741
+msgid "seconds"
+msgstr ""
+
+#: includes/Settings.php:667
+msgid "How long to wait for the CekEmail API before applying the 'API errors' policy. Slow mail servers can take up to 30 seconds on the first check of an address; later checks are cached."
+msgstr ""
+
+#: includes/Settings.php:678
+msgid "Test connection"
+msgstr ""
+
+#: includes/Settings.php:683
+msgid "Saves nothing and uses no credits. Save your settings first."
+msgstr ""
+
+#: includes/Settings.php:720
+msgid "Allow the submission"
+msgstr ""
+
+#: includes/Settings.php:722
+msgid "Block the submission"
+msgstr ""
+
+#: includes/Settings.php:744
+msgid "How long a result is reused before the address is checked again. Use 0 to disable caching."
+msgstr ""
+
+#: includes/Settings.php:759
+msgid "Public widget key from your CekEmail dashboard. It is safe to expose in the browser."
+msgstr ""
+
+#: includes/Settings.php:795
+msgid "Recent checks"
+msgstr ""
+
+#: includes/Settings.php:798
+msgid "No addresses have been checked yet."
+msgstr ""
+
+#: includes/Settings.php:807
+msgid "Time"
+msgstr ""
+
+#: includes/Settings.php:808
+msgid "Email"
+msgstr ""
+
+#: includes/Settings.php:809
+msgid "Status"
+msgstr ""
+
+#: includes/Settings.php:810
+msgid "Reason"
+msgstr ""
+
+#: includes/Settings.php:811
+msgid "Decision"
+msgstr ""
+
+#: includes/Settings.php:812
+msgid "Source"
+msgstr ""
+
+#: includes/Settings.php:832
+msgid "Clear log"
+msgstr ""
+
+#. translators: %s: error slug, for example network.
+#: includes/Settings.php:857
+#, php-format
+msgid "Error: %s"
+msgstr ""
+
+#: includes/Settings.php:884
+msgid "The API URL must be a full http or https address. The default was restored."
+msgstr ""
+
+#: includes/Validator.php:104
+msgid "We could not verify your email address right now. Please try again in a few minutes."
+msgstr ""
+
+#. translators: %s: suggested email address.
+#: includes/Validator.php:164
+#, php-format
+msgid "This email address cannot receive mail. Did you mean %s?"
+msgstr ""
+
+#: includes/Validator.php:167
+msgid "This email address cannot receive mail. Please check it for typos."
+msgstr ""
+
+#. translators: %s: suggested email address.
+#: includes/Validator.php:172
+#, php-format
+msgid "Disposable email addresses are not accepted. Did you mean %s?"
+msgstr ""
+
+#: includes/Validator.php:175
+msgid "Disposable email addresses are not accepted. Please use a permanent address."
+msgstr ""
+
+#. translators: %s: suggested email address.
+#: includes/Validator.php:180
+#, php-format
+msgid "We could not confirm that this email address can receive mail. Did you mean %s?"
+msgstr ""
+
+#: includes/Validator.php:183
+msgid "We could not confirm that this email address can receive mail. Please use a different address."
+msgstr ""
+
+#. translators: %s: suggested email address.
+#: includes/Validator.php:188
+#, php-format
+msgid "We could not verify this email address. Did you mean %s?"
+msgstr ""
+
+#: includes/Validator.php:191
+msgid "We could not verify this email address. Please use a different address."
+msgstr ""

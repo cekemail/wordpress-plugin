@@ -1,0 +1,27 @@
+{
+  "name": "cekemail/cekemail-email-validation",
+  "description": "Validates email addresses on WordPress forms with the CekEmail API.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.0"
+  },
+  "require-dev": {
+    "brain/monkey": "^2.6",
+    "mockery/mockery": "^1.6",
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CekEmail\\": "includes/",
+      "CekEmail\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "minimum-stability": "stable"
+}
