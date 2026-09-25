@@ -1,0 +1,11 @@
+.wordpress-org
+.git
+.gitignore
+.distignore
+.editorconfig
+tests
+phpunit.xml
+composer.json
+composer.lock
+vendor
+node_modules
