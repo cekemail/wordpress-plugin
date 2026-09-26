@@ -30,7 +30,7 @@ Supported forms:
 
 Features:
 
-* An optional front-end widget, bundled with the plugin and never loaded from a CDN, that checks every email field on the page while the visitor types and shows the result before the form is submitted. It uses a public widget key, never your API key.
+* An optional front-end widget, bundled with the plugin and never loaded from a CDN, that checks every email field on the page while the visitor types and shows the result before the form is submitted. It uses a public widget key, never your API key. The bundled widget is open source: https://github.com/cekemail/widget
 * Typo suggestions ("did you mean ...") in the error message.
 * Result caching, so the same address is not billed twice within the cache lifetime.
 * A "Test connection" button that validates your API key without spending credits.
