@@ -2,22 +2,22 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: CekEmail Email Validation 1.0.0\n"
+"Project-Id-Version: CekEmail Email Validation 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordpress-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-10T15:52:02+00:00\n"
+"POT-Creation-Date: 2026-09-26T17:05:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cekemail-email-validation\n"
 
 #. Plugin Name of the plugin
 #: cekemail-email-validation.php
-#: includes/Settings.php:413
-#: includes/Settings.php:461
+#: includes/Settings.php:436
+#: includes/Settings.php:484
 msgid "CekEmail Email Validation"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 
 #. Author of the plugin
 #: cekemail-email-validation.php
-#: includes/Settings.php:414
+#: includes/Settings.php:437
 msgid "CekEmail"
 msgstr ""
 
@@ -110,223 +110,227 @@ msgstr ""
 msgid "Contact Form 7"
 msgstr ""
 
-#: includes/Settings.php:251
+#: includes/Settings.php:274
 msgid "General"
 msgstr ""
 
-#: includes/Settings.php:258
+#: includes/Settings.php:281
 msgid "API key"
 msgstr ""
 
-#: includes/Settings.php:266
+#: includes/Settings.php:289
 msgid "API URL"
 msgstr ""
 
-#: includes/Settings.php:274
+#: includes/Settings.php:297
 msgid "Request timeout"
 msgstr ""
 
-#: includes/Settings.php:282
+#: includes/Settings.php:305
 msgid "Connection"
 msgstr ""
 
-#: includes/Settings.php:290
+#: includes/Settings.php:313
 msgid "Policy"
 msgstr ""
 
-#: includes/Settings.php:297
+#: includes/Settings.php:320
 msgid "Disposable addresses"
 msgstr ""
 
-#: includes/Settings.php:303
+#: includes/Settings.php:326
 msgid "Block addresses from disposable mail providers"
 msgstr ""
 
-#: includes/Settings.php:309
+#: includes/Settings.php:332
 msgid "Catch-all domains"
 msgstr ""
 
-#: includes/Settings.php:315
+#: includes/Settings.php:338
 msgid "Catch-all servers accept every address, so the mailbox itself cannot be confirmed."
 msgstr ""
 
-#: includes/Settings.php:321
+#: includes/Settings.php:344
 msgid "Unverifiable addresses"
 msgstr ""
 
-#: includes/Settings.php:327
+#: includes/Settings.php:350
 msgid "Used when the mail server greylists us or gives no usable answer."
 msgstr ""
 
-#: includes/Settings.php:333
+#: includes/Settings.php:356
 msgid "API errors"
 msgstr ""
 
-#: includes/Settings.php:339
+#: includes/Settings.php:362
 msgid "Used when the API cannot be reached, the key is rejected or credits run out."
 msgstr ""
 
-#: includes/Settings.php:345
+#: includes/Settings.php:368
 msgid "Typo suggestions"
 msgstr ""
 
-#: includes/Settings.php:351
+#: includes/Settings.php:374
 msgid "Include the suggested address in the error message"
 msgstr ""
 
-#: includes/Settings.php:357
+#: includes/Settings.php:380
 msgid "Cache lifetime"
 msgstr ""
 
-#: includes/Settings.php:365
+#: includes/Settings.php:388
 msgid "Integrations"
 msgstr ""
 
-#: includes/Settings.php:372
+#: includes/Settings.php:395
 msgid "Check addresses on"
 msgstr ""
 
-#: includes/Settings.php:380
+#: includes/Settings.php:403
 msgid "Front-end widget"
 msgstr ""
 
-#: includes/Settings.php:387
+#: includes/Settings.php:410
 msgid "Widget"
 msgstr ""
 
-#: includes/Settings.php:393
+#: includes/Settings.php:416
 msgid "Check every email field in the browser while visitors type"
 msgstr ""
 
-#: includes/Settings.php:399
+#: includes/Settings.php:422
 msgid "Widget key"
 msgstr ""
 
-#: includes/Settings.php:441
+#: includes/Settings.php:464
 msgid "Testing the connection…"
 msgstr ""
 
-#: includes/Settings.php:442
+#: includes/Settings.php:465
 msgid "The connection test could not be completed."
 msgstr ""
 
-#: includes/Settings.php:538
-#: includes/Settings.php:565
+#: includes/Settings.php:561
+#: includes/Settings.php:588
 msgid "You are not allowed to do that."
 msgstr ""
 
-#: includes/Settings.php:544
+#: includes/Settings.php:567
 msgid "The API client is not available."
 msgstr ""
 
-#: includes/Settings.php:584
+#: includes/Settings.php:607
 msgid "Create an API key in your CekEmail dashboard and paste it here."
 msgstr ""
 
-#: includes/Settings.php:593
+#: includes/Settings.php:616
 msgid "Decide what happens when an address cannot be confirmed. Invalid addresses are always blocked."
 msgstr ""
 
-#: includes/Settings.php:602
+#: includes/Settings.php:625
 msgid "Integrations only run while an API key is saved."
 msgstr ""
 
-#: includes/Settings.php:611
+#: includes/Settings.php:634
 msgid "The widget gives visitors feedback before they submit a form. It never exposes your API key."
 msgstr ""
 
-#: includes/Settings.php:612
+#: includes/Settings.php:635
 msgid "The script is bundled with the plugin, is only loaded on the front end, and attaches itself to every email field on the page, whichever plugin or theme rendered it."
 msgstr ""
 
-#: includes/Settings.php:629
+#: includes/Settings.php:652
 msgid "A key is saved. Leave blank to keep the current key."
 msgstr ""
 
-#: includes/Settings.php:631
+#: includes/Settings.php:654
 msgid "No key saved yet. Leave blank to keep the current key."
 msgstr ""
 
-#: includes/Settings.php:649
+#: includes/Settings.php:672
 msgid "Only change this if you use a self-hosted CekEmail instance."
 msgstr ""
 
-#: includes/Settings.php:664
-#: includes/Settings.php:741
+#: includes/Settings.php:672
+msgid "Self-hosted instances use the /api/v1 prefix automatically."
+msgstr ""
+
+#: includes/Settings.php:687
+#: includes/Settings.php:764
 msgid "seconds"
 msgstr ""
 
-#: includes/Settings.php:667
+#: includes/Settings.php:690
 msgid "How long to wait for the CekEmail API before applying the 'API errors' policy. Slow mail servers can take up to 30 seconds on the first check of an address; later checks are cached."
 msgstr ""
 
-#: includes/Settings.php:678
+#: includes/Settings.php:701
 msgid "Test connection"
 msgstr ""
 
-#: includes/Settings.php:683
+#: includes/Settings.php:706
 msgid "Saves nothing and uses no credits. Save your settings first."
 msgstr ""
 
-#: includes/Settings.php:720
+#: includes/Settings.php:743
 msgid "Allow the submission"
 msgstr ""
 
-#: includes/Settings.php:722
+#: includes/Settings.php:745
 msgid "Block the submission"
 msgstr ""
 
-#: includes/Settings.php:744
+#: includes/Settings.php:767
 msgid "How long a result is reused before the address is checked again. Use 0 to disable caching."
 msgstr ""
 
-#: includes/Settings.php:759
+#: includes/Settings.php:782
 msgid "Public widget key from your CekEmail dashboard. It is safe to expose in the browser."
 msgstr ""
 
-#: includes/Settings.php:795
+#: includes/Settings.php:818
 msgid "Recent checks"
 msgstr ""
 
-#: includes/Settings.php:798
+#: includes/Settings.php:821
 msgid "No addresses have been checked yet."
 msgstr ""
 
-#: includes/Settings.php:807
+#: includes/Settings.php:830
 msgid "Time"
 msgstr ""
 
-#: includes/Settings.php:808
+#: includes/Settings.php:831
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.php:809
+#: includes/Settings.php:832
 msgid "Status"
 msgstr ""
 
-#: includes/Settings.php:810
+#: includes/Settings.php:833
 msgid "Reason"
 msgstr ""
 
-#: includes/Settings.php:811
+#: includes/Settings.php:834
 msgid "Decision"
 msgstr ""
 
-#: includes/Settings.php:812
+#: includes/Settings.php:835
 msgid "Source"
 msgstr ""
 
-#: includes/Settings.php:832
+#: includes/Settings.php:855
 msgid "Clear log"
 msgstr ""
 
 #. translators: %s: error slug, for example network.
-#: includes/Settings.php:857
+#: includes/Settings.php:880
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: includes/Settings.php:884
+#: includes/Settings.php:907
 msgid "The API URL must be a full http or https address. The default was restored."
 msgstr ""
 
