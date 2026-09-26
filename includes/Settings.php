@@ -78,7 +78,7 @@ class Settings {
 	public static function defaults(): array {
 		return array(
 			'api_key'           => '',
-			'api_base_url'      => 'https://cekemail.com',
+			'api_base_url'      => 'https://api.cekemail.com',
 			'request_timeout'   => 15,
 			'widget_enabled'    => true,
 			'widget_key'        => '',
@@ -135,6 +135,29 @@ class Settings {
 	 */
 	public static function page_url(): string {
 		return admin_url( 'options-general.php?page=' . self::PAGE );
+	}
+
+	/**
+	 * Absolute URL of a versioned API endpoint.
+	 *
+	 * The hosted API on an `api.` host serves the versioned paths at its root.
+	 * Any other host, such as a self-hosted instance or the legacy
+	 * https://cekemail.com URL, serves them under the `/api` prefix.
+	 *
+	 * @param string $base_url Configured API URL.
+	 * @param string $path     Versioned endpoint path, leading slash included, such as `/v1/email-check`.
+	 * @return string
+	 */
+	public static function api_url( string $base_url, string $path ): string {
+		$base_url = untrailingslashit( $base_url );
+		$parsed   = wp_parse_url( $base_url );
+		$host     = is_array( $parsed ) && isset( $parsed['host'] ) ? strtolower( (string) $parsed['host'] ) : '';
+
+		if ( 0 !== strpos( $host, 'api.' ) ) {
+			$path = '/api' . $path;
+		}
+
+		return $base_url . $path;
 	}
 
 	/**
@@ -646,7 +669,7 @@ class Settings {
 			esc_attr( (string) $this->get( 'api_base_url' ) )
 		);
 
-		echo '<p class="description">' . esc_html__( 'Only change this if you use a self-hosted CekEmail instance.', 'cekemail-email-validation' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Only change this if you use a self-hosted CekEmail instance.', 'cekemail-email-validation' ) . ' ' . esc_html__( 'Self-hosted instances use the /api/v1 prefix automatically.', 'cekemail-email-validation' ) . '</p>';
 	}
 
 	/**

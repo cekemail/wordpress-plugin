@@ -167,7 +167,7 @@ class ApiClientTest extends TestCase {
 		$this->stub_empty_cache();
 
 		Functions\expect( 'wp_remote_post' )->once()->with(
-			'https://cekemail.com/api/v1/email-check',
+			'https://api.cekemail.com/v1/email-check',
 			Mockery::on(
 				static function ( $args ) {
 					return is_array( $args ) && 25 === $args['timeout'];
@@ -179,6 +179,41 @@ class ApiClientTest extends TestCase {
 		Functions\when( 'wp_remote_retrieve_body' )->justReturn( json_encode( $this->success_body() ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
 
 		$result = $this->make_client( array( 'request_timeout' => 25 ) )->check( 'john@gmail.com' );
+
+		$this->assertTrue( $result['ok'] );
+	}
+
+	/**
+	 * API URLs and the endpoint each one posts to.
+	 *
+	 * @return array<string, array{0: string, 1: string}>
+	 */
+	public static function endpoint_provider(): array {
+		return array(
+			'default api host' => array( 'https://api.cekemail.com', 'https://api.cekemail.com/v1/email-check' ),
+			'legacy default'   => array( 'https://cekemail.com', 'https://cekemail.com/api/v1/email-check' ),
+			'self-hosted'      => array( 'https://mail.example.com/', 'https://mail.example.com/api/v1/email-check' ),
+		);
+	}
+
+	/**
+	 * The check is posted to the endpoint for the configured API URL.
+	 *
+	 * @dataProvider endpoint_provider
+	 *
+	 * @param string $base_url Configured API URL.
+	 * @param string $expected Expected endpoint URL.
+	 * @return void
+	 */
+	public function test_check_posts_to_the_endpoint_for_the_configured_url( string $base_url, string $expected ): void {
+		$this->stub_empty_cache();
+
+		Functions\expect( 'wp_remote_post' )->once()->with( $expected, Mockery::type( 'array' ) )->andReturn( array() );
+
+		Functions\when( 'wp_remote_retrieve_response_code' )->justReturn( 200 );
+		Functions\when( 'wp_remote_retrieve_body' )->justReturn( json_encode( $this->success_body() ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
+
+		$result = $this->make_client( array( 'api_base_url' => $base_url ) )->check( 'john@gmail.com' );
 
 		$this->assertTrue( $result['ok'] );
 	}
@@ -358,7 +393,7 @@ class ApiClientTest extends TestCase {
 		$body['data']['reason_code'] = 'no_mx_records';
 
 		Functions\expect( 'wp_remote_post' )->once()->with(
-			'https://cekemail.com/api/v1/email-check',
+			'https://api.cekemail.com/v1/email-check',
 			Mockery::on(
 				static function ( $args ) {
 					return '{"email":"nobody@example.invalid"}' === $args['body'];
@@ -411,7 +446,7 @@ class ApiClientTest extends TestCase {
 	 */
 	public function test_health_reports_the_service_state(): void {
 		Functions\expect( 'wp_remote_get' )->once()->with(
-			'https://cekemail.com/api/v1/health',
+			'https://api.cekemail.com/v1/health',
 			Mockery::on(
 				static function ( $args ) {
 					return ! isset( $args['headers']['Authorization'] );

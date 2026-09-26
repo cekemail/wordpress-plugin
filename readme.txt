@@ -4,7 +4,7 @@ Tags: email validation, email verification, disposable email, woocommerce, conta
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ Features:
 
 = Privacy =
 
-This plugin is a service integration. Each time one of the supported forms is submitted, the email address being verified is sent, together with your API key, to the CekEmail API at the URL configured on the settings screen (https://cekemail.com by default). With the front-end widget switched on, addresses are also sent from the visitor's browser to the same service, using the public widget key.
+This plugin is a service integration. Each time one of the supported forms is submitted, the email address being verified is sent, together with your API key, to the CekEmail API at the URL configured on the settings screen (https://api.cekemail.com by default). With the front-end widget switched on, addresses are also sent from the visitor's browser to the same service, using the public widget key.
 
 No other personal data leaves your site. Addresses are stored locally only in masked form, in the recent checks log, and results are cached under a hash of the address. Read the [terms of service](https://cekemail.com/terms) and the [privacy policy](https://cekemail.com/privacy) before enabling the plugin, and mention the service in your own privacy policy.
 
@@ -75,6 +75,10 @@ Only in masked form. The recent checks log keeps entries such as `j***@example.c
 
 Results are cached for the cache lifetime you configure, so repeated submissions of the same address inside that window do not reach the API. The connection test uses no credits at all.
 
+= Should I change the API URL? =
+
+Only change this if you use a self-hosted CekEmail instance; self-hosted instances use the `/api/v1` prefix automatically. An address on an `api.` host, like the default https://api.cekemail.com, is called at `/v1`. Any other address, such as `https://mail.example.com` or the old default `https://cekemail.com`, is called at `/api/v1`.
+
 = Can I change the messages or the decisions? =
 
 Yes. Use the `cekemail_decision` filter to override any allow or block decision, and the `cekemail_after_check` action to log or report checks yourself.
@@ -85,6 +89,10 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 2. The recent checks log.
 
 == Changelog ==
+
+= 1.0.1 =
+* The API URL now defaults to https://api.cekemail.com, which serves the API at `/v1`.
+* Self-hosted instances, and sites that saved the old https://cekemail.com default, keep using the `/api/v1` paths automatically. No settings need to change.
 
 = 1.0.0 =
 * Initial release.
@@ -98,6 +106,9 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 * Indonesian (id_ID) translation.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Uses the new https://api.cekemail.com API host by default. Existing and self-hosted API URLs keep working.
 
 = 1.0.0 =
 Initial release.

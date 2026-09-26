@@ -158,6 +158,30 @@ class FrontendWidgetTest extends TestCase {
 	}
 
 	/**
+	 * The default API URL points the widget at the api. host without the /api prefix.
+	 *
+	 * @return void
+	 */
+	public function test_the_default_api_url_uses_the_api_host(): void {
+		Functions\when( 'wp_enqueue_script' )->justReturn( true );
+
+		$script = '';
+
+		Functions\when( 'wp_add_inline_script' )->alias(
+			static function ( $script_handle, $data ) use ( &$script ) {
+				$script = $data;
+			}
+		);
+
+		$settings                 = $this->enabled_settings();
+		$settings['api_base_url'] = Settings::defaults()['api_base_url'];
+
+		$this->make_widget( $settings )->enqueue();
+
+		$this->assertStringContainsString( 'window.CekEmail_API_URL = "https:\/\/api.cekemail.com\/v1\/widget\/email-check";', $script );
+	}
+
+	/**
 	 * Indonesian sites get the Indonesian widget messages.
 	 *
 	 * @return void

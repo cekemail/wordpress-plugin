@@ -29,9 +29,9 @@ class Frontend_Widget {
 	const SCRIPT = 'assets/js/cekemail-widget.min.js';
 
 	/**
-	 * Endpoint the widget posts to, appended to the configured API URL.
+	 * Endpoint the widget posts to, resolved against the configured API URL.
 	 */
-	const ENDPOINT = '/api/v1/widget/email-check';
+	const ENDPOINT = '/v1/widget/email-check';
 
 	/**
 	 * Settings repository.
@@ -113,7 +113,7 @@ class Frontend_Widget {
 	private function config_script(): string {
 		$config = array(
 			'CekEmail_APIKEY'   => $this->widget_key(),
-			'CekEmail_API_URL'  => untrailingslashit( (string) $this->settings->get( 'api_base_url' ) ) . self::ENDPOINT,
+			'CekEmail_API_URL'  => Settings::api_url( (string) $this->settings->get( 'api_base_url' ), self::ENDPOINT ),
 			'CekEmail_LOCALE'   => $this->locale(),
 			'CekEmail_MESSAGES' => (object) array(),
 		);

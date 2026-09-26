@@ -119,7 +119,7 @@ class Api_Client {
 	 */
 	public function health(): bool {
 		$response = wp_remote_get(
-			$this->endpoint( '/api/v1/health' ),
+			$this->endpoint( '/v1/health' ),
 			array(
 				'timeout'    => $this->timeout(),
 				'user-agent' => $this->user_agent(),
@@ -179,7 +179,7 @@ class Api_Client {
 		}
 
 		$response = wp_remote_post(
-			$this->endpoint( '/api/v1/email-check' ),
+			$this->endpoint( '/v1/email-check' ),
 			array(
 				'timeout'    => $this->timeout(),
 				'user-agent' => $this->user_agent(),
@@ -299,11 +299,11 @@ class Api_Client {
 	/**
 	 * Absolute endpoint URL for a path.
 	 *
-	 * @param string $path Endpoint path, leading slash included.
+	 * @param string $path Versioned endpoint path, leading slash included.
 	 * @return string
 	 */
 	private function endpoint( string $path ): string {
-		return untrailingslashit( (string) $this->settings->get( 'api_base_url' ) ) . $path;
+		return Settings::api_url( (string) $this->settings->get( 'api_base_url' ), $path );
 	}
 
 	/**

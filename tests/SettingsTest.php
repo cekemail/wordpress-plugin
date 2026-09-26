@@ -42,7 +42,7 @@ class SettingsTest extends TestCase {
 	public function test_defaults_are_applied(): void {
 		$settings = $this->make_settings();
 
-		$this->assertSame( 'https://cekemail.com', $settings->get( 'api_base_url' ) );
+		$this->assertSame( 'https://api.cekemail.com', $settings->get( 'api_base_url' ) );
 		$this->assertTrue( $settings->get( 'block_disposable' ) );
 		$this->assertSame( 'allow', $settings->get( 'on_catch_all' ) );
 		$this->assertSame( 3600, $settings->get( 'cache_ttl' ) );
@@ -107,7 +107,7 @@ class SettingsTest extends TestCase {
 
 		$output = $settings->sanitize( array( 'api_base_url' => $url ) );
 
-		$this->assertSame( 'https://cekemail.com', $output['api_base_url'] );
+		$this->assertSame( 'https://api.cekemail.com', $output['api_base_url'] );
 	}
 
 	/**
@@ -121,6 +121,35 @@ class SettingsTest extends TestCase {
 		$output = $settings->sanitize( array( 'api_base_url' => 'https://api.example.com/base/' ) );
 
 		$this->assertSame( 'https://api.example.com/base', $output['api_base_url'] );
+	}
+
+	/**
+	 * API URLs and the endpoint URL each one resolves to.
+	 *
+	 * @return array<string, array{0: string, 1: string}>
+	 */
+	public static function api_url_provider(): array {
+		return array(
+			'default api host'      => array( 'https://api.cekemail.com', 'https://api.cekemail.com/v1/email-check' ),
+			'api host with slash'   => array( 'https://api.cekemail.com/', 'https://api.cekemail.com/v1/email-check' ),
+			'legacy default'        => array( 'https://cekemail.com', 'https://cekemail.com/api/v1/email-check' ),
+			'legacy with slash'     => array( 'https://cekemail.com/', 'https://cekemail.com/api/v1/email-check' ),
+			'self-hosted'           => array( 'https://mail.example.com', 'https://mail.example.com/api/v1/email-check' ),
+			'self-hosted with port' => array( 'http://127.0.0.1:8010', 'http://127.0.0.1:8010/api/v1/email-check' ),
+		);
+	}
+
+	/**
+	 * Only an api. host drops the /api prefix.
+	 *
+	 * @dataProvider api_url_provider
+	 *
+	 * @param string $base_url Configured API URL.
+	 * @param string $expected Expected endpoint URL.
+	 * @return void
+	 */
+	public function test_api_url_adds_the_api_prefix_outside_an_api_host( string $base_url, string $expected ): void {
+		$this->assertSame( $expected, Settings::api_url( $base_url, '/v1/email-check' ) );
 	}
 
 	/**

@@ -60,6 +60,12 @@ abstract class TestCase extends PHPUnitTestCase {
 			}
 		);
 
+		Functions\when( 'wp_parse_url' )->alias(
+			static function ( $url, $component = -1 ) {
+				return parse_url( (string) $url, $component ); // phpcs:ignore WordPress.WP.AlternativeFunctions.parse_url_parse_url
+			}
+		);
+
 		Functions\when( 'is_wp_error' )->alias(
 			static function ( $thing ) {
 				return $thing instanceof \WP_Error;
