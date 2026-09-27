@@ -4,7 +4,7 @@ Tags: email validation, email verification, disposable email, woocommerce, conta
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,9 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 
 == Changelog ==
 
+= 1.0.3 =
+* Plugin and author URIs now point to different pages (WordPress.org requirement).
+
 = 1.0.2 =
 * WordPress.org submission fixes.
 * Tested up to WordPress 7.1.
@@ -121,6 +124,9 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 * Indonesian (id_ID) translation.
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+Plugin and author URIs now point to different pages, as WordPress.org requires. No functional changes.
 
 = 1.0.2 =
 WordPress.org submission fixes and security hardening: the API URL must now use https (except on localhost), and uninstall cleans up every site of a network.
