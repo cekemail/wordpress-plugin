@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-27T07:29:13+00:00\n"
-"PO-Revision-Date: 2026-09-27T07:29:13+00:00\n"
+"POT-Creation-Date: 2026-09-27T07:36:04+00:00\n"
+"PO-Revision-Date: 2026-09-27T07:36:04+00:00\n"
 "Language: id_ID\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: cekemail-email-validation\n"
@@ -60,35 +60,35 @@ msgstr "Kunci API Anda tidak diizinkan memverifikasi alamat email dari situs ini
 msgid "Your API key was rejected. Email addresses are no longer being verified."
 msgstr "Kunci API Anda ditolak. Alamat email tidak lagi diverifikasi."
 
-#: includes/Api_Client.php:90
+#: includes/Api_Client.php:103
 msgid "Add your API key and save the settings before testing the connection."
 msgstr "Tambahkan kunci API Anda dan simpan pengaturan sebelum menguji koneksi."
 
-#: includes/Api_Client.php:101
+#: includes/Api_Client.php:119
 msgid "Connection successful. Your API key is valid."
 msgstr "Koneksi berhasil. Kunci API Anda valid."
 
-#: includes/Api_Client.php:289
+#: includes/Api_Client.php:307
 msgid "The API key was rejected. Check that you copied the whole key and that it has not been revoked."
 msgstr "Kunci API ditolak. Pastikan Anda menyalin seluruh kunci dan kunci tersebut belum dicabut."
 
-#: includes/Api_Client.php:291
+#: includes/Api_Client.php:309
 msgid "Your CekEmail account has run out of credits."
 msgstr "Kredit akun CekEmail Anda telah habis."
 
-#: includes/Api_Client.php:293
+#: includes/Api_Client.php:311
 msgid "This API key is not allowed to verify email addresses from this site. Check its scopes and IP allowlist."
 msgstr "Kunci API ini tidak diizinkan memverifikasi alamat email dari situs ini. Periksa cakupan dan daftar IP yang diizinkan."
 
-#: includes/Api_Client.php:295
+#: includes/Api_Client.php:313
 msgid "Too many requests were sent to the API. Please try again in a minute."
 msgstr "Terlalu banyak permintaan dikirim ke API. Silakan coba lagi dalam satu menit."
 
-#: includes/Api_Client.php:297
+#: includes/Api_Client.php:315
 msgid "Could not reach the CekEmail API. Check the API URL and your server connectivity."
 msgstr "Tidak dapat menghubungi API CekEmail. Periksa URL API dan koneksi server Anda."
 
-#: includes/Api_Client.php:299
+#: includes/Api_Client.php:317
 msgid "The API returned an unexpected response."
 msgstr "API mengembalikan respons yang tidak terduga."
 
@@ -192,10 +192,6 @@ msgstr "Widget sisi depan"
 msgid "Widget"
 msgstr "Widget"
 
-#: includes/Settings.php:416
-msgid "Check every email field in the browser while visitors type"
-msgstr "Periksa setiap kolom email di peramban saat pengunjung mengetik"
-
 #: includes/Settings.php:422
 msgid "Widget key"
 msgstr "Kunci widget"
@@ -208,109 +204,105 @@ msgstr "Menguji koneksi…"
 msgid "The connection test could not be completed."
 msgstr "Uji koneksi tidak dapat diselesaikan."
 
-#: includes/Settings.php:561
-#: includes/Settings.php:588
+#: includes/Settings.php:565
+#: includes/Settings.php:592
 msgid "You are not allowed to do that."
 msgstr "Anda tidak diizinkan melakukan tindakan tersebut."
 
-#: includes/Settings.php:567
+#: includes/Settings.php:571
 msgid "The API client is not available."
 msgstr "Klien API tidak tersedia."
 
-#: includes/Settings.php:607
+#: includes/Settings.php:611
 msgid "Create an API key in your CekEmail dashboard and paste it here."
 msgstr "Buat kunci API di dasbor CekEmail Anda lalu tempelkan di sini."
 
-#: includes/Settings.php:616
+#: includes/Settings.php:620
 msgid "Decide what happens when an address cannot be confirmed. Invalid addresses are always blocked."
 msgstr "Tentukan apa yang terjadi saat sebuah alamat tidak dapat dipastikan. Alamat yang tidak valid selalu diblokir."
 
-#: includes/Settings.php:625
+#: includes/Settings.php:629
 msgid "Integrations only run while an API key is saved."
 msgstr "Integrasi hanya berjalan selama kunci API tersimpan."
 
-#: includes/Settings.php:634
+#: includes/Settings.php:638
 msgid "The widget gives visitors feedback before they submit a form. It never exposes your API key."
 msgstr "Widget memberi umpan balik kepada pengunjung sebelum mereka mengirim formulir. Widget tidak pernah menampilkan kunci API Anda."
 
-#: includes/Settings.php:635
+#: includes/Settings.php:639
 msgid "The script is bundled with the plugin, is only loaded on the front end, and attaches itself to every email field on the page, whichever plugin or theme rendered it."
 msgstr "Skrip disertakan di dalam plugin, hanya dimuat di sisi depan situs, dan menempel pada setiap kolom email di halaman, apa pun plugin atau tema yang menampilkannya."
 
-#: includes/Settings.php:652
-msgid "A key is saved. Leave blank to keep the current key."
-msgstr "Sebuah kunci telah tersimpan. Biarkan kosong untuk mempertahankan kunci saat ini."
-
-#: includes/Settings.php:654
+#: includes/Settings.php:658
 msgid "No key saved yet. Leave blank to keep the current key."
 msgstr "Belum ada kunci yang tersimpan. Biarkan kosong untuk mempertahankan kunci saat ini."
 
-#: includes/Settings.php:672
+#: includes/Settings.php:684
 msgid "Only change this if you use a self-hosted CekEmail instance."
 msgstr "Ubah hanya jika Anda menggunakan instans CekEmail yang Anda hosting sendiri."
 
-#: includes/Settings.php:701
+#: includes/Settings.php:713
 msgid "Test connection"
 msgstr "Uji koneksi"
 
-#: includes/Settings.php:706
+#: includes/Settings.php:718
 msgid "Saves nothing and uses no credits. Save your settings first."
 msgstr "Tidak menyimpan apa pun dan tidak menggunakan kredit. Simpan pengaturan Anda terlebih dahulu."
 
-#: includes/Settings.php:743
+#: includes/Settings.php:755
 msgid "Allow the submission"
 msgstr "Izinkan pengiriman"
 
-#: includes/Settings.php:745
+#: includes/Settings.php:757
 msgid "Block the submission"
 msgstr "Blokir pengiriman"
 
-#: includes/Settings.php:687
-#: includes/Settings.php:764
+#: includes/Settings.php:699
+#: includes/Settings.php:776
 msgid "seconds"
 msgstr "detik"
 
-#: includes/Settings.php:767
+#: includes/Settings.php:779
 msgid "How long a result is reused before the address is checked again. Use 0 to disable caching."
 msgstr "Berapa lama sebuah hasil digunakan kembali sebelum alamat diperiksa ulang. Gunakan 0 untuk menonaktifkan cache."
 
-#: includes/Settings.php:782
+#: includes/Settings.php:794
 msgid "Public widget key from your CekEmail dashboard. It is safe to expose in the browser."
 msgstr "Kunci widget publik dari dasbor CekEmail Anda. Kunci ini aman ditampilkan di peramban."
 
-#: includes/Settings.php:818
+#: includes/Settings.php:830
 msgid "Recent checks"
 msgstr "Pemeriksaan terbaru"
 
-#: includes/Settings.php:821
+#: includes/Settings.php:833
 msgid "No addresses have been checked yet."
 msgstr "Belum ada alamat yang diperiksa."
 
-#: includes/Settings.php:830
+#: includes/Settings.php:842
 msgid "Time"
 msgstr "Waktu"
 
-#: includes/Settings.php:831
+#: includes/Settings.php:843
 msgid "Email"
 msgstr "Email"
 
-#: includes/Settings.php:832
+#: includes/Settings.php:844
 msgid "Status"
 msgstr "Status"
 
-#: includes/Settings.php:833
+#: includes/Settings.php:845
 msgid "Reason"
 msgstr "Alasan"
 
-#: includes/Settings.php:834
+#: includes/Settings.php:846
 msgid "Decision"
 msgstr "Keputusan"
 
-#: includes/Settings.php:835
+#: includes/Settings.php:847
 msgid "Source"
 msgstr "Sumber"
 
-#: includes/Settings.php:855
+#: includes/Settings.php:867
 msgid "Clear log"
 msgstr "Bersihkan log"
 
@@ -362,24 +354,36 @@ msgstr "Kami tidak dapat memverifikasi alamat email ini. Silakan gunakan alamat 
 msgid "Request timeout"
 msgstr "Batas waktu permintaan"
 
-#: includes/Settings.php:690
+#: includes/Settings.php:702
 msgid "How long to wait for the CekEmail API before applying the 'API errors' policy. Slow mail servers can take up to 30 seconds on the first check of an address; later checks are cached."
 msgstr "Berapa lama menunggu API CekEmail sebelum kebijakan 'Kesalahan API' diterapkan. Server email yang lambat dapat memerlukan waktu hingga 30 detik pada pemeriksaan pertama sebuah alamat; pemeriksaan berikutnya diambil dari cache."
 
 #. translators: %s: error slug, for example network.
-#: includes/Settings.php:880
+#: includes/Settings.php:892
 #, php-format
 msgid "Error: %s"
 msgstr "Kesalahan: %s"
 
-#: includes/Settings.php:672
+#: includes/Settings.php:684
 msgid "Self-hosted instances use the /api/v1 prefix automatically."
 msgstr "Instans self-hosted otomatis memakai prefiks /api/v1."
 
-#: includes/Settings.php:672
+#: includes/Settings.php:684
 msgid "The address must use https; plain http is only accepted for localhost and 127.0.0.1."
 msgstr "Alamat harus memakai https; http biasa hanya diterima untuk localhost dan 127.0.0.1."
 
-#: includes/Settings.php:909
+#: includes/Settings.php:921
 msgid "The API URL must be a full https address; plain http is only accepted for localhost and 127.0.0.1. The default was restored."
 msgstr "URL API harus berupa alamat https yang lengkap; http biasa hanya diterima untuk localhost dan 127.0.0.1. Nilai bawaan telah dipulihkan."
+
+#: includes/Settings.php:416
+msgid "Check email addresses in the browser when visitors leave the email field"
+msgstr "Periksa alamat email di peramban saat pengunjung meninggalkan kolom email"
+
+#: includes/Settings.php:656
+msgid "A key is saved. Leave blank to keep the current key, or tick \"Remove the saved API key\" to delete it and stop verification."
+msgstr "Sebuah kunci telah tersimpan. Biarkan kosong untuk mempertahankan kunci saat ini, atau centang \"Hapus kunci API yang tersimpan\" untuk menghapusnya dan menghentikan verifikasi."
+
+#: includes/Settings.php:667
+msgid "Remove the saved API key"
+msgstr "Hapus kunci API yang tersimpan"

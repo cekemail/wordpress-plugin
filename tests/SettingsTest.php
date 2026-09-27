@@ -66,6 +66,26 @@ class SettingsTest extends TestCase {
 	}
 
 	/**
+	 * Ticking the removal box clears the stored key, even when a new key is typed.
+	 *
+	 * @return void
+	 */
+	public function test_the_removal_box_clears_the_stored_key(): void {
+		$settings = $this->make_settings( array( 'api_key' => 'stored-token' ) );
+
+		$this->assertSame( '', $settings->sanitize( array( 'remove_api_key' => '1' ) )['api_key'] );
+		$this->assertSame(
+			'',
+			$settings->sanitize(
+				array(
+					'api_key'        => 'new-token',
+					'remove_api_key' => '1',
+				)
+			)['api_key']
+		);
+	}
+
+	/**
 	 * A submitted key replaces the stored one and is trimmed.
 	 *
 	 * @return void

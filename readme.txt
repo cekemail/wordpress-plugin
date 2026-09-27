@@ -30,7 +30,7 @@ Supported forms:
 
 Features:
 
-* An optional front-end widget, bundled with the plugin and never loaded from a CDN, that checks every email field on the page while the visitor types and shows the result before the form is submitted. It uses a public widget key, never your API key. The bundled widget is open source: https://github.com/cekemail/widget
+* An optional front-end widget, bundled with the plugin and never loaded from a CDN, that checks every email field on the page when visitors leave the email field and shows the result before the form is submitted. It uses a public widget key, never your API key. The bundled widget is open source: https://github.com/cekemail/widget
 * Typo suggestions ("did you mean ...") in the error message.
 * Result caching, so the same address is not billed twice within the cache lifetime.
 * A "Test connection" button that validates your API key without spending credits.
@@ -43,7 +43,7 @@ Features:
 This plugin connects to the CekEmail API, an email verification service run by CekEmail at https://api.cekemail.com (or the self-hosted URL you configure on the settings screen). The service is needed to tell whether an address is valid, deliverable or disposable.
 
 * Form submissions: when an API key is configured, the plugin sends the email address entered in each covered form (WordPress registration, WordPress comments, WooCommerce checkout and account registration, Contact Form 7 email fields), together with your API key, from your server to the CekEmail API at https://api.cekemail.com. Nothing is sent while no API key is configured.
-* Front-end widget: when the optional front-end widget is switched on, the bundled widget script sends the address a visitor types into an email field from the visitor's browser to the same CekEmail API at https://api.cekemail.com, using your public widget key.
+* Front-end widget: when the optional front-end widget is switched on, the bundled widget script sends the address a visitor enters, when they leave the email field, from the visitor's browser to the same CekEmail API at https://api.cekemail.com, using your public widget key.
 
 No other personal data leaves your site. Addresses are stored locally only in masked form, in the recent checks log, and results are cached under a hash of the address. The service is provided under the CekEmail [terms of service](https://cekemail.com/terms-of-service) and [privacy policy](https://cekemail.com/privacy-policy). Read both before enabling the plugin, and mention the service in your own privacy policy.
 
@@ -60,7 +60,7 @@ No other personal data leaves your site. Addresses are stored locally only in ma
 
 = Do I need a CekEmail account? =
 
-Yes. The plugin talks to the CekEmail API, which requires an API key from https://cekemail.com. Verification stops as soon as the key is removed.
+Yes. The plugin talks to the CekEmail API, which requires an API key from https://cekemail.com. Verification stops as soon as the key is removed with "Remove the saved API key" under Settings > CekEmail.
 
 = What happens when the API is unreachable? =
 
@@ -97,6 +97,9 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 * WordPress.org submission fixes.
 * Tested up to WordPress 7.1.
 * Contact Form 7 input sanitisation.
+* A saved API key can now be removed from the settings screen.
+* Admin notices about a rejected key, missing credits or a forbidden key clear as soon as the API answers successfully again.
+* The widget description now says it checks an address when visitors leave the email field.
 * The API URL must use https, so the API key is never sent unencrypted; plain http is only accepted for localhost and 127.0.0.1.
 * API responses with unexpected field types are ignored.
 * Local parts of one or two characters are masked completely in the recent checks log.

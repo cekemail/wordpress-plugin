@@ -413,7 +413,7 @@ class Settings {
 			'cekemail_section_widget',
 			array(
 				'key'   => 'widget_enabled',
-				'label' => __( 'Check every email field in the browser while visitors type', 'cekemail-email-validation' ),
+				'label' => __( 'Check email addresses in the browser when visitors leave the email field', 'cekemail-email-validation' ),
 			)
 		);
 
@@ -511,7 +511,11 @@ class Settings {
 
 		$api_key = isset( $input['api_key'] ) ? trim( sanitize_text_field( wp_unslash( $input['api_key'] ) ) ) : '';
 
-		$output['api_key'] = '' === $api_key ? (string) $current['api_key'] : $api_key;
+		if ( ! empty( $input['remove_api_key'] ) ) {
+			$output['api_key'] = '';
+		} else {
+			$output['api_key'] = '' === $api_key ? (string) $current['api_key'] : $api_key;
+		}
 
 		$output['api_base_url'] = $this->sanitize_url(
 			isset( $input['api_base_url'] ) ? $input['api_base_url'] : '',
@@ -649,12 +653,20 @@ class Settings {
 		echo '<p class="description">';
 
 		if ( $this->has_api_key() ) {
-			echo esc_html__( 'A key is saved. Leave blank to keep the current key.', 'cekemail-email-validation' );
+			echo esc_html__( 'A key is saved. Leave blank to keep the current key, or tick "Remove the saved API key" to delete it and stop verification.', 'cekemail-email-validation' );
 		} else {
 			echo esc_html__( 'No key saved yet. Leave blank to keep the current key.', 'cekemail-email-validation' );
 		}
 
 		echo '</p>';
+
+		if ( $this->has_api_key() ) {
+			printf(
+				'<p><label><input type="checkbox" name="%1$s[remove_api_key]" value="1" /> %2$s</label></p>',
+				esc_attr( self::OPTION ),
+				esc_html__( 'Remove the saved API key', 'cekemail-email-validation' )
+			);
+		}
 	}
 
 	/**

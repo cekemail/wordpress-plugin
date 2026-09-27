@@ -8,6 +8,7 @@
 namespace CekEmail\Tests;
 
 use Brain\Monkey\Functions;
+use CekEmail\Admin_Notices;
 use CekEmail\Api_Client;
 use CekEmail\Settings;
 use Mockery;
@@ -21,10 +22,11 @@ class ApiClientTest extends TestCase {
 	/**
 	 * Build a client with mocked settings.
 	 *
-	 * @param array $settings Setting overrides.
+	 * @param array              $settings Setting overrides.
+	 * @param Admin_Notices|null $notices  Admin notice queue.
 	 * @return Api_Client
 	 */
-	private function make_client( array $settings = array() ): Api_Client {
+	private function make_client( array $settings = array(), ?Admin_Notices $notices = null ): Api_Client {
 		$values = array_merge(
 			Settings::defaults(),
 			array( 'api_key' => 'test-token' ),
@@ -43,7 +45,7 @@ class ApiClientTest extends TestCase {
 			}
 		);
 
-		return new Api_Client( $settings_mock );
+		return new Api_Client( $settings_mock, $notices );
 	}
 
 	/**
@@ -150,6 +152,80 @@ class ApiClientTest extends TestCase {
 		$this->assertSame( 'unknown', $result['status'] );
 		$this->assertNull( $result['reason_code'] );
 		$this->assertNull( $result['reason'] );
+	}
+
+	/**
+	 * A successful request clears every pending admin notice.
+	 *
+	 * @return void
+	 */
+	public function test_a_successful_check_clears_the_admin_notices(): void {
+		$this->stub_empty_cache();
+		$this->stub_response( 200, $this->success_body() );
+
+		$notices = Mockery::mock( Admin_Notices::class );
+		$notices->shouldReceive( 'clear_all' )->once();
+
+		$this->assertTrue( $this->make_client( array(), $notices )->check( 'john@gmail.com' )['ok'] );
+	}
+
+	/**
+	 * A failed request leaves the admin notices alone.
+	 *
+	 * @return void
+	 */
+	public function test_a_failed_check_keeps_the_admin_notices(): void {
+		$this->stub_empty_cache();
+		$this->stub_response( 401, array( 'message' => 'Unauthenticated.' ) );
+
+		$notices = Mockery::mock( Admin_Notices::class );
+		$notices->shouldNotReceive( 'clear_all' );
+
+		$this->assertFalse( $this->make_client( array(), $notices )->check( 'john@gmail.com' )['ok'] );
+	}
+
+	/**
+	 * A cached result proves nothing about the key, so the notices stay.
+	 *
+	 * @return void
+	 */
+	public function test_a_cached_result_keeps_the_admin_notices(): void {
+		$cached = $this->success_body()['data'];
+
+		Functions\when( 'get_transient' )->justReturn(
+			array(
+				'ok'          => true,
+				'status'      => $cached['status'],
+				'reason_code' => $cached['reason_code'],
+				'reason'      => $cached['reason'],
+				'suggestion'  => null,
+				'error'       => null,
+				'http_code'   => 200,
+			)
+		);
+		Functions\expect( 'wp_remote_post' )->never();
+
+		$notices = Mockery::mock( Admin_Notices::class );
+		$notices->shouldNotReceive( 'clear_all' );
+
+		$this->assertTrue( $this->make_client( array(), $notices )->check( 'john@gmail.com' )['ok'] );
+	}
+
+	/**
+	 * A successful connection test clears the key notices but not the credits notice.
+	 *
+	 * @return void
+	 */
+	public function test_a_successful_connection_test_clears_the_key_notices(): void {
+		$this->stub_response( 200, $this->success_body() );
+
+		$notices = Mockery::mock( Admin_Notices::class );
+		$notices->shouldReceive( 'clear' )->once()->with( 'unauthorized' );
+		$notices->shouldReceive( 'clear' )->once()->with( 'forbidden' );
+		$notices->shouldNotReceive( 'clear' )->with( 'insufficient_credits' );
+		$notices->shouldNotReceive( 'clear_all' );
+
+		$this->assertTrue( $this->make_client( array(), $notices )->test_connection()['ok'] );
 	}
 
 	/**

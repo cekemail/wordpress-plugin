@@ -37,12 +37,21 @@ class Api_Client {
 	private $settings;
 
 	/**
+	 * Admin notice queue, cleared once the API answers successfully again.
+	 *
+	 * @var Admin_Notices|null
+	 */
+	private $notices;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param Settings $settings Settings repository.
+	 * @param Settings           $settings Settings repository.
+	 * @param Admin_Notices|null $notices  Admin notice queue.
 	 */
-	public function __construct( Settings $settings ) {
+	public function __construct( Settings $settings, ?Admin_Notices $notices = null ) {
 		$this->settings = $settings;
+		$this->notices  = $notices;
 	}
 
 	/**
@@ -71,6 +80,10 @@ class Api_Client {
 
 		$result = $this->request_check( $email );
 
+		if ( $result['ok'] && null !== $this->notices ) {
+			$this->notices->clear_all();
+		}
+
 		if ( $result['ok'] && $ttl > 0 ) {
 			set_transient( $cache_key, $result, $ttl );
 		}
@@ -96,6 +109,11 @@ class Api_Client {
 		$result = $this->request_check( self::PROBE_EMAIL );
 
 		if ( $result['ok'] ) {
+			if ( null !== $this->notices ) {
+				$this->notices->clear( 'unauthorized' );
+				$this->notices->clear( 'forbidden' );
+			}
+
 			return array(
 				'ok'        => true,
 				'message'   => __( 'Connection successful. Your API key is valid.', 'cekemail-email-validation' ),

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-27T07:29:13+00:00\n"
+"POT-Creation-Date: 2026-09-27T07:36:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cekemail-email-validation\n"
@@ -58,35 +58,35 @@ msgstr ""
 msgid "Your API key was rejected. Email addresses are no longer being verified."
 msgstr ""
 
-#: includes/Api_Client.php:90
+#: includes/Api_Client.php:103
 msgid "Add your API key and save the settings before testing the connection."
 msgstr ""
 
-#: includes/Api_Client.php:101
+#: includes/Api_Client.php:119
 msgid "Connection successful. Your API key is valid."
 msgstr ""
 
-#: includes/Api_Client.php:289
+#: includes/Api_Client.php:307
 msgid "The API key was rejected. Check that you copied the whole key and that it has not been revoked."
 msgstr ""
 
-#: includes/Api_Client.php:291
+#: includes/Api_Client.php:309
 msgid "Your CekEmail account has run out of credits."
 msgstr ""
 
-#: includes/Api_Client.php:293
+#: includes/Api_Client.php:311
 msgid "This API key is not allowed to verify email addresses from this site. Check its scopes and IP allowlist."
 msgstr ""
 
-#: includes/Api_Client.php:295
+#: includes/Api_Client.php:313
 msgid "Too many requests were sent to the API. Please try again in a minute."
 msgstr ""
 
-#: includes/Api_Client.php:297
+#: includes/Api_Client.php:315
 msgid "Could not reach the CekEmail API. Check the API URL and your server connectivity."
 msgstr ""
 
-#: includes/Api_Client.php:299
+#: includes/Api_Client.php:317
 msgid "The API returned an unexpected response."
 msgstr ""
 
@@ -195,7 +195,7 @@ msgid "Widget"
 msgstr ""
 
 #: includes/Settings.php:416
-msgid "Check every email field in the browser while visitors type"
+msgid "Check email addresses in the browser when visitors leave the email field"
 msgstr ""
 
 #: includes/Settings.php:422
@@ -210,131 +210,135 @@ msgstr ""
 msgid "The connection test could not be completed."
 msgstr ""
 
-#: includes/Settings.php:561
-#: includes/Settings.php:588
+#: includes/Settings.php:565
+#: includes/Settings.php:592
 msgid "You are not allowed to do that."
 msgstr ""
 
-#: includes/Settings.php:567
+#: includes/Settings.php:571
 msgid "The API client is not available."
 msgstr ""
 
-#: includes/Settings.php:607
+#: includes/Settings.php:611
 msgid "Create an API key in your CekEmail dashboard and paste it here."
 msgstr ""
 
-#: includes/Settings.php:616
+#: includes/Settings.php:620
 msgid "Decide what happens when an address cannot be confirmed. Invalid addresses are always blocked."
 msgstr ""
 
-#: includes/Settings.php:625
+#: includes/Settings.php:629
 msgid "Integrations only run while an API key is saved."
 msgstr ""
 
-#: includes/Settings.php:634
+#: includes/Settings.php:638
 msgid "The widget gives visitors feedback before they submit a form. It never exposes your API key."
 msgstr ""
 
-#: includes/Settings.php:635
+#: includes/Settings.php:639
 msgid "The script is bundled with the plugin, is only loaded on the front end, and attaches itself to every email field on the page, whichever plugin or theme rendered it."
 msgstr ""
 
-#: includes/Settings.php:652
-msgid "A key is saved. Leave blank to keep the current key."
+#: includes/Settings.php:656
+msgid "A key is saved. Leave blank to keep the current key, or tick \"Remove the saved API key\" to delete it and stop verification."
 msgstr ""
 
-#: includes/Settings.php:654
+#: includes/Settings.php:658
 msgid "No key saved yet. Leave blank to keep the current key."
 msgstr ""
 
-#: includes/Settings.php:672
+#: includes/Settings.php:667
+msgid "Remove the saved API key"
+msgstr ""
+
+#: includes/Settings.php:684
 msgid "Only change this if you use a self-hosted CekEmail instance."
 msgstr ""
 
-#: includes/Settings.php:672
+#: includes/Settings.php:684
 msgid "Self-hosted instances use the /api/v1 prefix automatically."
 msgstr ""
 
-#: includes/Settings.php:672
+#: includes/Settings.php:684
 msgid "The address must use https; plain http is only accepted for localhost and 127.0.0.1."
 msgstr ""
 
-#: includes/Settings.php:687
-#: includes/Settings.php:764
+#: includes/Settings.php:699
+#: includes/Settings.php:776
 msgid "seconds"
 msgstr ""
 
-#: includes/Settings.php:690
+#: includes/Settings.php:702
 msgid "How long to wait for the CekEmail API before applying the 'API errors' policy. Slow mail servers can take up to 30 seconds on the first check of an address; later checks are cached."
 msgstr ""
 
-#: includes/Settings.php:701
+#: includes/Settings.php:713
 msgid "Test connection"
 msgstr ""
 
-#: includes/Settings.php:706
+#: includes/Settings.php:718
 msgid "Saves nothing and uses no credits. Save your settings first."
 msgstr ""
 
-#: includes/Settings.php:743
+#: includes/Settings.php:755
 msgid "Allow the submission"
 msgstr ""
 
-#: includes/Settings.php:745
+#: includes/Settings.php:757
 msgid "Block the submission"
 msgstr ""
 
-#: includes/Settings.php:767
+#: includes/Settings.php:779
 msgid "How long a result is reused before the address is checked again. Use 0 to disable caching."
 msgstr ""
 
-#: includes/Settings.php:782
+#: includes/Settings.php:794
 msgid "Public widget key from your CekEmail dashboard. It is safe to expose in the browser."
 msgstr ""
 
-#: includes/Settings.php:818
+#: includes/Settings.php:830
 msgid "Recent checks"
 msgstr ""
 
-#: includes/Settings.php:821
+#: includes/Settings.php:833
 msgid "No addresses have been checked yet."
 msgstr ""
 
-#: includes/Settings.php:830
+#: includes/Settings.php:842
 msgid "Time"
 msgstr ""
 
-#: includes/Settings.php:831
+#: includes/Settings.php:843
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.php:832
+#: includes/Settings.php:844
 msgid "Status"
 msgstr ""
 
-#: includes/Settings.php:833
+#: includes/Settings.php:845
 msgid "Reason"
 msgstr ""
 
-#: includes/Settings.php:834
+#: includes/Settings.php:846
 msgid "Decision"
 msgstr ""
 
-#: includes/Settings.php:835
+#: includes/Settings.php:847
 msgid "Source"
 msgstr ""
 
-#: includes/Settings.php:855
+#: includes/Settings.php:867
 msgid "Clear log"
 msgstr ""
 
 #. translators: %s: error slug, for example network.
-#: includes/Settings.php:880
+#: includes/Settings.php:892
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: includes/Settings.php:909
+#: includes/Settings.php:921
 msgid "The API URL must be a full https address; plain http is only accepted for localhost and 127.0.0.1. The default was restored."
 msgstr ""
 

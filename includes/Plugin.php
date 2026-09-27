@@ -82,7 +82,7 @@ final class Plugin {
 	private function __construct() {
 		$this->settings        = new Settings();
 		$this->admin_notices   = new Admin_Notices();
-		$this->api_client      = new Api_Client( $this->settings );
+		$this->api_client      = new Api_Client( $this->settings, $this->admin_notices );
 		$this->validator       = new Validator( $this->settings, $this->api_client, $this->admin_notices );
 		$this->log             = new Log();
 		$this->frontend_widget = new Frontend_Widget( $this->settings );
