@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    env:
+      CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check tag matches plugin version
+        id: version
+        run: |
+          version=$(grep -m1 '^ \* Version:' cekemail-email-validation.php | sed -E 's/^ \* Version:[[:space:]]*//' | tr -d '[:space:]')
+          if [ -z "$version" ]; then
+            echo "::error::Could not read the Version header from cekemail-email-validation.php"
+            exit 1
+          fi
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match plugin version v$version"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build distribution zip
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          mkdir -p build/cekemail-email-validation deploy/wordpress
+          rsync -a --exclude-from=.distignore --exclude=/build/ --exclude=/deploy/ ./ build/cekemail-email-validation/
+          (cd build && zip -r "../deploy/wordpress/cekemail-email-validation-$VERSION.zip" cekemail-email-validation)
+          cp "deploy/wordpress/cekemail-email-validation-$VERSION.zip" deploy/wordpress/cekemail-email-validation.zip
+
+          jq -n \
+            --arg version "$VERSION" \
+            --arg tag "$GITHUB_REF_NAME" \
+            --arg commit "$GITHUB_SHA" \
+            --arg date "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{version: $version, tag: $tag, commit: $commit, date: $date}' > deploy/wordpress/version.json
+
+          echo "Files to deploy:"
+          find deploy -type f
+          unzip -l "deploy/wordpress/cekemail-email-validation-$VERSION.zip"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: deploy/wordpress/cekemail-email-validation-${{ steps.version.outputs.version }}.zip
+
+      - name: Deploy to static.cekemail.com
+        uses: swznd/ftp-sftp-actions@master
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          user: ${{ secrets.SFTP_USER }}
+          privateKey: ${{ secrets.SSH_KEY }}
+          actions: |
+            upload deploy/wordpress ./web/static.cekemail.com/public/wordpress
+
+      - name: Skip Cloudflare purge
+        if: ${{ env.CF_ZONE_ID == '' || env.CF_API_TOKEN == '' }}
+        run: echo "::notice::Cloudflare purge skipped (CF_ZONE_ID/CF_API_TOKEN not set)"
+
+      - name: Purge Cloudflare cache
+        if: ${{ env.CF_ZONE_ID != '' && env.CF_API_TOKEN != '' }}
+        run: |
+          response=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{
+              "files": [
+                "https://static.cekemail.com/wordpress/cekemail-email-validation.zip",
+                "https://static.cekemail.com/wordpress/version.json"
+              ]
+            }')
+          echo "$response" | jq '{success, errors, messages}'
+          echo "$response" | jq -e '.success' > /dev/null
