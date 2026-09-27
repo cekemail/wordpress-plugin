@@ -10,3 +10,7 @@ composer.lock
 vendor
 node_modules
 .phpunit.cache
+README.md
+.github
+build
+deploy
