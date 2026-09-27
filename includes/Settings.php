@@ -669,7 +669,7 @@ class Settings {
 			esc_attr( (string) $this->get( 'api_base_url' ) )
 		);
 
-		echo '<p class="description">' . esc_html__( 'Only change this if you use a self-hosted CekEmail instance.', 'cekemail-email-validation' ) . ' ' . esc_html__( 'Self-hosted instances use the /api/v1 prefix automatically.', 'cekemail-email-validation' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Only change this if you use a self-hosted CekEmail instance.', 'cekemail-email-validation' ) . ' ' . esc_html__( 'Self-hosted instances use the /api/v1 prefix automatically.', 'cekemail-email-validation' ) . ' ' . esc_html__( 'The address must use https; plain http is only accepted for localhost and 127.0.0.1.', 'cekemail-email-validation' ) . '</p>';
 	}
 
 	/**
@@ -894,7 +894,9 @@ class Settings {
 		$scheme = is_array( $parsed ) && isset( $parsed['scheme'] ) ? strtolower( (string) $parsed['scheme'] ) : '';
 		$host   = is_array( $parsed ) && isset( $parsed['host'] ) ? (string) $parsed['host'] : '';
 
-		if ( '' !== $host && in_array( $scheme, array( 'http', 'https' ), true ) ) {
+		$is_local = in_array( strtolower( $host ), array( 'localhost', '127.0.0.1' ), true );
+
+		if ( '' !== $host && ( 'https' === $scheme || ( 'http' === $scheme && $is_local ) ) ) {
 			$url = esc_url_raw( $url, array( 'http', 'https' ) );
 		} else {
 			$url = '';
@@ -904,7 +906,7 @@ class Settings {
 			add_settings_error(
 				self::OPTION,
 				'cekemail_api_base_url',
-				__( 'The API URL must be a full http or https address. The default was restored.', 'cekemail-email-validation' )
+				__( 'The API URL must be a full https address; plain http is only accepted for localhost and 127.0.0.1. The default was restored.', 'cekemail-email-validation' )
 			);
 
 			return $fallback;

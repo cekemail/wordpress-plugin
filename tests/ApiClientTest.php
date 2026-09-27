@@ -130,6 +130,29 @@ class ApiClientTest extends TestCase {
 	}
 
 	/**
+	 * Non-string fields in a successful body are dropped.
+	 *
+	 * @return void
+	 */
+	public function test_check_ignores_non_string_fields(): void {
+		$this->stub_empty_cache();
+
+		$body                        = $this->success_body();
+		$body['data']['status']      = array( 'valid' );
+		$body['data']['reason_code'] = 42;
+		$body['data']['reason']      = array( 'text' => 'Mailbox exists' );
+
+		$this->stub_response( 200, $body );
+
+		$result = $this->make_client()->check( 'john@gmail.com' );
+
+		$this->assertTrue( $result['ok'] );
+		$this->assertSame( 'unknown', $result['status'] );
+		$this->assertNull( $result['reason_code'] );
+		$this->assertNull( $result['reason'] );
+	}
+
+	/**
 	 * The request carries the token, the user agent and the timeout.
 	 *
 	 * @return void
@@ -480,10 +503,12 @@ class ApiClientTest extends TestCase {
 	 */
 	public static function mask_provider(): array {
 		return array(
-			'regular address' => array( 'john@gmail.com', 'j***@gmail.com' ),
-			'short local'     => array( 'a@b.com', 'a***@b.com' ),
-			'no at sign'      => array( 'not-an-address', '***' ),
-			'empty'           => array( '', '' ),
+			'regular address'  => array( 'john@gmail.com', 'j***@gmail.com' ),
+			'one character'    => array( 'a@b.com', '***@b.com' ),
+			'two characters'   => array( 'ab@b.com', '***@b.com' ),
+			'three characters' => array( 'abc@b.com', 'a***@b.com' ),
+			'no at sign'       => array( 'not-an-address', '***' ),
+			'empty'            => array( '', '' ),
 		);
 	}
 

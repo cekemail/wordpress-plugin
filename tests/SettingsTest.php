@@ -91,6 +91,7 @@ class SettingsTest extends TestCase {
 			'javascript'    => array( 'javascript:alert(1)' ),
 			'no scheme'     => array( 'cekemail.com' ),
 			'ftp'           => array( 'ftp://cekemail.com' ),
+			'plain http'    => array( 'http://api.example.com' ),
 		);
 	}
 
@@ -121,6 +122,34 @@ class SettingsTest extends TestCase {
 		$output = $settings->sanitize( array( 'api_base_url' => 'https://api.example.com/base/' ) );
 
 		$this->assertSame( 'https://api.example.com/base', $output['api_base_url'] );
+	}
+
+	/**
+	 * Local addresses that may use plain http.
+	 *
+	 * @return array<string, array{0: string}>
+	 */
+	public static function local_http_url_provider(): array {
+		return array(
+			'localhost' => array( 'http://localhost:8010' ),
+			'loopback'  => array( 'http://127.0.0.1:8010' ),
+		);
+	}
+
+	/**
+	 * Plain http is kept for a local instance.
+	 *
+	 * @dataProvider local_http_url_provider
+	 *
+	 * @param string $url Submitted URL.
+	 * @return void
+	 */
+	public function test_plain_http_is_kept_for_a_local_instance( string $url ): void {
+		$settings = $this->make_settings();
+
+		$output = $settings->sanitize( array( 'api_base_url' => $url ) );
+
+		$this->assertSame( $url, $output['api_base_url'] );
 	}
 
 	/**

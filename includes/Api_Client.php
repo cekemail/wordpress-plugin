@@ -162,6 +162,10 @@ class Api_Client {
 		$local  = substr( $email, 0, $at );
 		$domain = substr( $email, $at );
 
+		if ( strlen( $local ) <= 2 ) {
+			return '***' . $domain;
+		}
+
 		return substr( $local, 0, 1 ) . '***' . $domain;
 	}
 
@@ -212,9 +216,9 @@ class Api_Client {
 
 			return array(
 				'ok'          => true,
-				'status'      => isset( $data['status'] ) ? (string) $data['status'] : 'unknown',
-				'reason_code' => isset( $data['reason_code'] ) ? (string) $data['reason_code'] : null,
-				'reason'      => isset( $data['reason'] ) ? (string) $data['reason'] : null,
+				'status'      => ( isset( $data['status'] ) && is_string( $data['status'] ) ) ? $data['status'] : 'unknown',
+				'reason_code' => ( isset( $data['reason_code'] ) && is_string( $data['reason_code'] ) ) ? $data['reason_code'] : null,
+				'reason'      => ( isset( $data['reason'] ) && is_string( $data['reason'] ) ) ? $data['reason'] : null,
 				'suggestion'  => ( isset( $data['suggestion'] ) && is_string( $data['suggestion'] ) && '' !== $data['suggestion'] ) ? $data['suggestion'] : null,
 				'error'       => null,
 				'http_code'   => $http_code,

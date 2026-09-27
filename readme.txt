@@ -2,9 +2,9 @@
 Contributors: cekemail
 Tags: email validation, email verification, disposable email, woocommerce, contact form 7
 Requires at least: 6.4
-Tested up to: 6.7
+Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,11 +38,14 @@ Features:
 * Admin notices when your key is rejected or your credits run out.
 * Filters and actions so developers can extend or override every decision.
 
-= Privacy =
+= External services =
 
-This plugin is a service integration. Each time one of the supported forms is submitted, the email address being verified is sent, together with your API key, to the CekEmail API at the URL configured on the settings screen (https://api.cekemail.com by default). With the front-end widget switched on, addresses are also sent from the visitor's browser to the same service, using the public widget key.
+This plugin connects to the CekEmail API, an email verification service run by CekEmail at https://api.cekemail.com (or the self-hosted URL you configure on the settings screen). The service is needed to tell whether an address is valid, deliverable or disposable.
 
-No other personal data leaves your site. Addresses are stored locally only in masked form, in the recent checks log, and results are cached under a hash of the address. Read the [terms of service](https://cekemail.com/terms) and the [privacy policy](https://cekemail.com/privacy) before enabling the plugin, and mention the service in your own privacy policy.
+* Form submissions: when an API key is configured, the plugin sends the email address entered in each covered form (WordPress registration, WordPress comments, WooCommerce checkout and account registration, Contact Form 7 email fields), together with your API key, from your server to the CekEmail API at https://api.cekemail.com. Nothing is sent while no API key is configured.
+* Front-end widget: when the optional front-end widget is switched on, the bundled widget script sends the address a visitor types into an email field from the visitor's browser to the same CekEmail API at https://api.cekemail.com, using your public widget key.
+
+No other personal data leaves your site. Addresses are stored locally only in masked form, in the recent checks log, and results are cached under a hash of the address. The service is provided under the CekEmail [terms of service](https://cekemail.com/terms-of-service) and [privacy policy](https://cekemail.com/privacy-policy). Read both before enabling the plugin, and mention the service in your own privacy policy.
 
 == Installation ==
 
@@ -77,7 +80,7 @@ Results are cached for the cache lifetime you configure, so repeated submissions
 
 = Should I change the API URL? =
 
-Only change this if you use a self-hosted CekEmail instance; self-hosted instances use the `/api/v1` prefix automatically. An address on an `api.` host, like the default https://api.cekemail.com, is called at `/v1`. Any other address, such as `https://mail.example.com` or the old default `https://cekemail.com`, is called at `/api/v1`.
+Only change this if you use a self-hosted CekEmail instance; self-hosted instances use the `/api/v1` prefix automatically. An address on an `api.` host, like the default https://api.cekemail.com, is called at `/v1`. Any other address, such as `https://mail.example.com` or the old default `https://cekemail.com`, is called at `/api/v1`. The address must use https; plain http is only accepted for `localhost` and `127.0.0.1`, so your API key is never sent unencrypted.
 
 = Can I change the messages or the decisions? =
 
@@ -89,6 +92,15 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 2. The recent checks log.
 
 == Changelog ==
+
+= 1.0.2 =
+* WordPress.org submission fixes.
+* Tested up to WordPress 7.1.
+* Contact Form 7 input sanitisation.
+* The API URL must use https, so the API key is never sent unencrypted; plain http is only accepted for localhost and 127.0.0.1.
+* API responses with unexpected field types are ignored.
+* Local parts of one or two characters are masked completely in the recent checks log.
+* Uninstall removes the plugin's options and notice transients on every site of a network, without flushing the object cache.
 
 = 1.0.1 =
 * The API URL now defaults to https://api.cekemail.com, which serves the API at `/v1`.
@@ -106,6 +118,9 @@ Yes. Use the `cekemail_decision` filter to override any allow or block decision,
 * Indonesian (id_ID) translation.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+WordPress.org submission fixes and security hardening: the API URL must now use https (except on localhost), and uninstall cleans up every site of a network.
 
 = 1.0.1 =
 Uses the new https://api.cekemail.com API host by default. Existing and self-hosted API URLs keep working.

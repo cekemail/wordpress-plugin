@@ -96,14 +96,8 @@ class CF7 implements Integration {
 			return $result;
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Contact Form 7 verifies the submission before running its validation filters.
-		$posted = isset( $_POST[ $name ] ) ? wp_unslash( $_POST[ $name ] ) : '';
-
-		if ( ! is_scalar( $posted ) ) {
-			return $result;
-		}
-
-		$email = trim( sanitize_email( (string) $posted ) );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Contact Form 7 verifies its own submission before running its validation filters.
+		$email = isset( $_POST[ $name ] ) && is_string( $_POST[ $name ] ) ? trim( sanitize_email( wp_unslash( $_POST[ $name ] ) ) ) : '';
 
 		if ( '' === $email || ! is_email( $email ) ) {
 			return $result;

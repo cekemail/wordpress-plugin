@@ -1,27 +1,39 @@
 <?php
 /**
- * Removes every option and transient the plugin created.
+ * Removes the options and notice transients the plugin created.
+ *
+ * Result transients expire on their own after the cache lifetime, so they are
+ * left for WordPress to clear.
  *
  * @package CekEmail
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-delete_option( 'cekemail_settings' );
-delete_option( 'cekemail_recent_checks' );
+require_once __DIR__ . '/includes/Admin_Notices.php';
 
-global $wpdb;
+$cekemail_uninstall_site = static function () {
+	delete_option( 'cekemail_settings' );
+	delete_option( 'cekemail_recent_checks' );
 
-$cekemail_transient = $wpdb->esc_like( '_transient_cekemail_' ) . '%';
-$cekemail_timeout   = $wpdb->esc_like( '_transient_timeout_cekemail_' ) . '%';
+	foreach ( \CekEmail\Admin_Notices::types() as $cekemail_notice_type ) {
+		delete_transient( \CekEmail\Admin_Notices::TRANSIENT_PREFIX . $cekemail_notice_type );
+	}
+};
 
-// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-$wpdb->query(
-	$wpdb->prepare(
-		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
-		$cekemail_transient,
-		$cekemail_timeout
-	)
-);
+if ( is_multisite() ) {
+	$cekemail_site_ids = get_sites(
+		array(
+			'fields' => 'ids',
+			'number' => 0,
+		)
+	);
 
-wp_cache_flush();
+	foreach ( $cekemail_site_ids as $cekemail_site_id ) {
+		switch_to_blog( (int) $cekemail_site_id );
+		$cekemail_uninstall_site();
+		restore_current_blog();
+	}
+} else {
+	$cekemail_uninstall_site();
+}

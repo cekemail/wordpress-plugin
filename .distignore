@@ -9,3 +9,4 @@ composer.json
 composer.lock
 vendor
 node_modules
+.phpunit.cache
