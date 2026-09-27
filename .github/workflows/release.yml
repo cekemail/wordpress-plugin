@@ -74,15 +74,19 @@ jobs:
 
       - name: Purge Cloudflare cache
         if: ${{ env.CF_ZONE_ID != '' && env.CF_API_TOKEN != '' }}
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
+          payload=$(jq -n --arg version "$VERSION" '{
+            files: [
+              "https://static.cekemail.com/wordpress/cekemail-email-validation.zip",
+              "https://static.cekemail.com/wordpress/cekemail-email-validation-\($version).zip",
+              "https://static.cekemail.com/wordpress/version.json"
+            ]
+          }')
           response=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
             -H "Authorization: Bearer $CF_API_TOKEN" \
             -H "Content-Type: application/json" \
-            --data '{
-              "files": [
-                "https://static.cekemail.com/wordpress/cekemail-email-validation.zip",
-                "https://static.cekemail.com/wordpress/version.json"
-              ]
-            }')
+            --data "$payload")
           echo "$response" | jq '{success, errors, messages}'
           echo "$response" | jq -e '.success' > /dev/null
