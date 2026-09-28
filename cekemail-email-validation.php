@@ -3,7 +3,7 @@
  * Plugin Name: CekEmail Email Validation
  * Plugin URI: https://cekemail.com/features/wordpress
  * Description: Validates email addresses submitted through WordPress forms with the CekEmail API, blocking invalid, undeliverable and disposable addresses before they reach your database.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Requires at least: 6.4
  * Requires PHP: 8.0
  * Author: CekEmail
@@ -11,14 +11,13 @@
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: cekemail-email-validation
- * Domain Path: /languages
  *
  * @package CekEmail
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CEKEMAIL_VERSION', '1.0.3' );
+define( 'CEKEMAIL_VERSION', '1.0.4' );
 define( 'CEKEMAIL_PLUGIN_FILE', __FILE__ );
 define( 'CEKEMAIL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -55,13 +54,6 @@ spl_autoload_register( 'cekemail_autoload' );
  * @return void
  */
 function cekemail_bootstrap() {
-	// phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- Registers the translations bundled in /languages, which just-in-time loading does not look in.
-	load_plugin_textdomain(
-		'cekemail-email-validation',
-		false,
-		dirname( plugin_basename( CEKEMAIL_PLUGIN_FILE ) ) . '/languages'
-	);
-
 	\CekEmail\Plugin::instance()->register();
 }
 

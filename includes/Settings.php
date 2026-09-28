@@ -77,18 +77,18 @@ class Settings {
 	 */
 	public static function defaults(): array {
 		return array(
-			'api_key'           => '',
-			'api_base_url'      => 'https://api.cekemail.com',
-			'request_timeout'   => 15,
-			'widget_enabled'    => true,
-			'widget_key'        => '',
-			'block_disposable'  => true,
-			'on_catch_all'      => 'allow',
-			'on_unknown'        => 'allow',
-			'on_api_error'      => 'allow',
-			'show_suggestion'   => true,
-			'cache_ttl'         => 3600,
-			'integrations'      => self::default_integrations(),
+			'api_key'          => '',
+			'api_base_url'     => 'https://api.cekemail.com',
+			'request_timeout'  => 15,
+			'widget_enabled'   => true,
+			'widget_key'       => '',
+			'block_disposable' => true,
+			'on_catch_all'     => 'allow',
+			'on_unknown'       => 'allow',
+			'on_api_error'     => 'allow',
+			'show_suggestion'  => true,
+			'cache_ttl'        => 3600,
+			'integrations'     => self::default_integrations(),
 		);
 	}
 
@@ -209,14 +209,14 @@ class Settings {
 	/**
 	 * Read one setting.
 	 *
-	 * @param string $key     Setting key.
-	 * @param mixed  $default Value returned when the key is unknown.
+	 * @param string $key      Setting key.
+	 * @param mixed  $fallback Value returned when the key is unknown.
 	 * @return mixed
 	 */
-	public function get( string $key, $default = null ) {
+	public function get( string $key, $fallback = null ) {
 		$settings = $this->all();
 
-		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $default;
+		return array_key_exists( $key, $settings ) ? $settings[ $key ] : $fallback;
 	}
 
 	/**
