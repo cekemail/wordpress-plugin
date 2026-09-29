@@ -3,7 +3,7 @@
  * Plugin Name: CekEmail Email Validation
  * Plugin URI: https://cekemail.com/features/wordpress
  * Description: Validates email addresses submitted through WordPress forms with the CekEmail API, blocking invalid, undeliverable and disposable addresses before they reach your database.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Requires at least: 6.4
  * Requires PHP: 8.0
  * Author: CekEmail
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CEKEMAIL_VERSION', '1.0.4' );
+define( 'CEKEMAIL_VERSION', '1.0.5' );
 define( 'CEKEMAIL_PLUGIN_FILE', __FILE__ );
 define( 'CEKEMAIL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
