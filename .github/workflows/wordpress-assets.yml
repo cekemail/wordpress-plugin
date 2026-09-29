@@ -1,0 +1,28 @@
+name: WordPress.org readme and assets
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - readme.txt
+      - '.wordpress-org/**'
+
+permissions:
+  contents: read
+
+jobs:
+  assets:
+    if: "${{ !startsWith(github.event.head_commit.message, 'chore: release') }}"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update WordPress.org readme and assets
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: cekemail-email-validation
